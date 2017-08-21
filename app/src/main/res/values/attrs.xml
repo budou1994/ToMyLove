@@ -2,6 +2,9 @@
 <resources>
 
     <declare-styleable name="snow">
-        <attr name="img" format="reference" />
+        <attr name="flakeSrc" format="reference" />
+        <attr name="flakeDelay" format="integer" />
+        <attr name="flakeScale" format="integer" />
+        <attr name="flakeNumber" format="integer" />
     </declare-styleable>
 </resources>
