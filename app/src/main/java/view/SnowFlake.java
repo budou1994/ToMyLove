@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.Rect;
 
 import java.util.Random;
 
@@ -79,6 +80,7 @@ public class SnowFlake {
         int width = canvas.getWidth();
         int height = canvas.getHeight();
         move(width, height);
-        canvas.drawCircle(position.x, position.y, flakeSize, paint);
+        canvas.drawBitmap(bitmap,null,new Rect(0,0,position.x,position.y),paint);
+//        canvas.drawCircle(position.x, position.y, flakeSize, paint);
     }
 }

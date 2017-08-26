@@ -6,12 +6,19 @@
     android:layout_height="match_parent"
     tools:context="com.budou.snow.MainActivity">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:src="@drawable/xmn"
-        android:layout_height="match_parent" />
-    <view.SnowView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <!--<ImageView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:scaleType="fitXY"-->
+        <!--android:src="@drawable/xmn" />-->
 
+    <!--<view.SnowView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:flakeSrc="@drawable/sonw" />-->
+
+    <WebView
+        android:layout_width="match_parent"
+        android:id="@+id/webview"
+        android:layout_height="match_parent"/>
 </RelativeLayout>
