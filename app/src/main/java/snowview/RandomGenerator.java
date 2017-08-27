@@ -1,4 +1,4 @@
-package view;
+package snowview;
 
 import java.util.Random;
 

@@ -1,12 +1,10 @@
-package view;
+package snowview;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
-
-import java.util.Random;
 
 
 public class SnowFlake {
@@ -80,7 +78,11 @@ public class SnowFlake {
         int width = canvas.getWidth();
         int height = canvas.getHeight();
         move(width, height);
-        canvas.drawBitmap(bitmap,null,new Rect(0,0,position.x,position.y),paint);
+        canvas.drawBitmap(bitmap,position.x,position.y,paint);
 //        canvas.drawCircle(position.x, position.y, flakeSize, paint);
+    }
+    public void draw(Canvas canvas) {
+        move(canvas.getWidth(), canvas.getHeight());
+        canvas.drawCircle((float) this.position.x, (float) this.position.y, this.flakeSize, this.paint);
     }
 }

@@ -1,4 +1,4 @@
-package view;
+package snowview;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -8,7 +8,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -28,7 +27,7 @@ public class SnowView extends View {
 
     private int mFLAKESNumber = DEFAULT_FLAKES_NUMBER;// 雪花可设置的数量
     private int mDelay = DEFAULT_DELAY;// 页面刷新的延迟(可设置)
-    private static final int FLAKES_SCALE = 4;// 雪花默认大小
+    private static final int FLAKES_SCALE = 3;// 雪花默认大小
     private int mImgId, mScale, mRawWidth;
     private Bitmap bitmap;
     private Paint paint;
@@ -55,7 +54,7 @@ public class SnowView extends View {
         setBackgroundResource(R.drawable.xmn);
         if (attrs != null) {
             TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.snow);
-            mImgId = a.getResourceId(R.styleable.snow_flakeSrc, R.drawable.sonw);
+            mImgId = a.getResourceId(R.styleable.snow_flakeSrc, R.drawable.heart);
             mFLAKESNumber = a.getInteger(R.styleable.snow_flakeNumber, DEFAULT_FLAKES_NUMBER);
             mDelay = a.getInteger(R.styleable.snow_flakeDelay, DEFAULT_DELAY);
             mScale = a.getInteger(R.styleable.snow_flakeScale, FLAKES_SCALE);
@@ -115,7 +114,8 @@ public class SnowView extends View {
         for (SnowFlake flake : flakes
                 ) {
             //todo  在这个地方 传递过去的bitmap对象会报空指针的
-            flake.draw(canvas,bitmap );
+            flake.draw(canvas );
+//            flake.draw(canvas,BitmapFactory.decodeResource(getResources(),R.drawable.heart));
         }
 
         getHandler().postDelayed(new Runnable() {
