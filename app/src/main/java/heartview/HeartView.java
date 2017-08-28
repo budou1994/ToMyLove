@@ -9,6 +9,8 @@ import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import com.budou.snow.R;
+
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReference;
 

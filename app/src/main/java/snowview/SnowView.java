@@ -51,7 +51,7 @@ public class SnowView extends View {
 
     private void init(Context context, AttributeSet attrs) {
 
-        setBackgroundResource(R.drawable.xmn);
+//        setBackgroundResource(R.drawable.xmn);
         if (attrs != null) {
             TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.snow);
             mImgId = a.getResourceId(R.styleable.snow_flakeSrc, R.drawable.heart);
@@ -63,7 +63,7 @@ public class SnowView extends View {
         //设置画笔
         // 抗锯齿
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setColor(Color.WHITE);
+        paint.setColor(Color.parseColor("#FEDAEF"));
         paint.setStyle(Paint.Style.FILL);
     }
 

@@ -2,12 +2,14 @@ package com.budou.snow;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
@@ -16,9 +18,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
 import snowview.FlowersView;
 
 public class MainActivity extends AppCompatActivity {
@@ -46,6 +45,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            //透明状态栏
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //透明导航栏
+//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        }
         setContentView(R.layout.activity_main);
 //        startActivity(new Intent(this,TypeTextViewActivity.class));
 //        WebView webView = (WebView) findViewById(R.id.webview);
@@ -54,6 +59,15 @@ public class MainActivity extends AppCompatActivity {
 //        webView.loadUrl("file:///android_asset/qx/index.html");
         initFlower();
         initBtn();
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                Message msg = new Message();
+                msg.what = SNOW_BLOCK;
+                mHandler.sendMessage(msg);
+            }
+        }.start();
     }
 
     private void initFlower() {
@@ -79,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 mHandler.sendMessage(msg);
             }
         };
-        myTimer.schedule(mTask, 3000, 10);
+        myTimer.schedule(mTask, 3000,10);
     }
 
 
@@ -88,7 +102,8 @@ public class MainActivity extends AppCompatActivity {
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,LoveToYouActivity.class));
+                startActivity(new Intent(MainActivity.this,TypeTextViewActivity.class));
+                finish();
             }
         });
     }

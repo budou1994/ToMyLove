@@ -1,12 +1,18 @@
 package com.budou.snow;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -38,13 +44,13 @@ public class LoveToYouActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if (msg.what==1) {
+            if (msg.what == 1) {
                 computeTime();
-                daysTv.setText(mDay+"");
-                hoursTv.setText(mHour+"");
-                minutesTv.setText(mMin+"");
-                secondsTv.setText(mSecond+"");
-                if (mDay==0&&mHour==0&&mMin==0&&mSecond==0) {
+                daysTv.setText(mDay + "");
+                hoursTv.setText(mHour + "");
+                minutesTv.setText(mMin + "");
+                secondsTv.setText(mSecond + "");
+                if (mDay == 0 && mHour == 0 && mMin == 0 && mSecond == 0) {
                     countDown.setVisibility(View.GONE);
                 }
             }
@@ -54,6 +60,13 @@ public class LoveToYouActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            //透明状态栏
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //透明导航栏
+//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        }
         setContentView(R.layout.activity_love_to_you);
 
         heartView = (HeartView) findViewById(R.id.surfaceView);
@@ -70,10 +83,12 @@ public class LoveToYouActivity extends AppCompatActivity {
 
         startRun();
     }
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         heartView.reDraw();
         return super.onTouchEvent(event);
+
     }
 
     public void reDraw(View v) {
@@ -106,56 +121,55 @@ public class LoveToYouActivity extends AppCompatActivity {
                                 tv_text_1.setTextColor(Color.RED);
                                 tv_text_2.setTextColor(Color.RED);
 
-                            } else if (clo == 3){
+                            } else if (clo == 3) {
 
                                 clo = 4;
                                 tv_text.setTextColor(Color.BLACK);
                                 tv_text_1.setTextColor(Color.BLACK);
                                 tv_text_2.setTextColor(Color.BLACK);
-                            } else if (clo == 4){
+                            } else if (clo == 4) {
 
                                 clo = 5;
                                 tv_text.setTextColor(Color.WHITE);
                                 tv_text_1.setTextColor(Color.WHITE);
                                 tv_text_2.setTextColor(Color.WHITE);
-                            }else if (clo == 5){
+                            } else if (clo == 5) {
 
                                 clo = 6;
                                 tv_text.setTextColor(Color.GREEN);
                                 tv_text_1.setTextColor(Color.GREEN);
                                 tv_text_2.setTextColor(Color.GREEN);
-                            } else if (clo == 6){
+                            } else if (clo == 6) {
 
                                 clo = 7;
                                 tv_text.setTextColor(Color.MAGENTA);
                                 tv_text_1.setTextColor(Color.MAGENTA);
                                 tv_text_2.setTextColor(Color.MAGENTA);
-                            }else if (clo == 7){
+                            } else if (clo == 7) {
 
                                 clo = 8;
                                 tv_text.setTextColor(Color.CYAN);
                                 tv_text_1.setTextColor(Color.CYAN);
                                 tv_text_2.setTextColor(Color.CYAN);
-                            }else if (clo == 8){
+                            } else if (clo == 8) {
 
                                 clo = 9;
                                 tv_text.setTextColor(Color.DKGRAY);
                                 tv_text_1.setTextColor(Color.DKGRAY);
                                 tv_text_2.setTextColor(Color.DKGRAY);
-                            }
-                            else if (clo == 9){
+                            } else if (clo == 9) {
 
                                 clo = 10;
                                 tv_text.setTextColor(Color.GRAY);
                                 tv_text_1.setTextColor(Color.GRAY);
                                 tv_text_2.setTextColor(Color.GRAY);
-                            }else if (clo == 10){
+                            } else if (clo == 10) {
 
                                 clo = 11;
                                 tv_text.setTextColor(Color.LTGRAY);
                                 tv_text_1.setTextColor(Color.LTGRAY);
                                 tv_text_2.setTextColor(Color.LTGRAY);
-                            }else {
+                            } else {
                                 clo = 0;
                                 tv_text.setTextColor(Color.BLUE);
                                 tv_text_1.setTextColor(Color.BLUE);
@@ -210,5 +224,35 @@ public class LoveToYouActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            AlertDialog dialog = builder.create();
+            dialog.setTitle("我的水平太菜了，请见谅。");
+            dialog.setMessage("这是送你的礼物,虽然我现在还是写不出来更棒的东西，但是这个是我亲手做的。" +
+                    "这里面我不会的地方都是我一行行的看着别人代码敲出来的，希望你喜欢！");
+            dialog.setIcon(R.drawable.tomylove);
+            dialog.setButton(DialogInterface.BUTTON_POSITIVE, "狠心离开", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+//                    finish();
+                    System.exit(0);
+//                    dialog.dismiss();
+                }
+            });
+            dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "我听完这首歌", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            dialog.show();
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

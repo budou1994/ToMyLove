@@ -14,6 +14,7 @@ public class TypeTextViewActivity extends BaseActivity {
 
 	private TypeTextView mTypeTextView = null;
 	private static final String TEST_DATA = "/**\n" +
+			"*2017-5-5.\n" +
 			"*2017-8-27.\n" +
 			"*/\n" +
 			"Boy name = 小杨\n" +
@@ -59,16 +60,17 @@ public class TypeTextViewActivity extends BaseActivity {
 			}
 		});
 
-		final Intent it = new Intent(this, MainActivity.class); //你要转向的Activity
+		final Intent it = new Intent(this, LoveToYouActivity.class); //你要转向的Activity
 
 		Timer timer = new Timer();
 		TimerTask task = new TimerTask() {
 			@Override
 			public void run() {
 				startActivity(it); //执行
+				finish();
 			}
 		};
-		timer.schedule(task, 1000 * 70); //10秒后
+		timer.schedule(task, 1000 * 60); //10秒后
 	}
 	
 	@Override
@@ -81,11 +83,11 @@ public class TypeTextViewActivity extends BaseActivity {
 		mTypeTextView.start( TEST_DATA );
 	}
 	
-	public void onClick( View v ){
-		if( v.getId( ) == R.id.showBtnId ){
-			showConent( );
-		}
-	}
+//	public void onClick( View v ){
+//		if( v.getId( ) == R.id.showBtnId ){
+//			showConent( );
+//		}
+//	}
 	
 	private void print( String printStr ){
 		System.out.println( "TAG == TypeTextViewActivity, info == " + printStr );
